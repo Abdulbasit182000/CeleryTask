@@ -5,22 +5,36 @@ class Command(BaseCommand):
     help = 'Run the convert task multiple times'
 
     def handle(self, *args, **options):
-        x = 0
-        start = 0
-        end = 10
+        while(True):
+            x = 0
+            start = 0
+            end = 10
 
-        while x != 10:
-            print('while start')
-            print(start, end)
+            while x != 10:
+                print(start, end)
 
-            for i in range(1):
-                print(f'This is chunk {x+1}')
-                reuslt=convertpst.apply_async(args=[start, end], countdown=(i+1) * 20)
-                reuslt.wait()
+                for i in range(1):
+                    reuslt=convert.apply_async(args=[start, end], countdown=(i+1) * 20)
+                    reuslt.wait()
 
-            print('Chunk', x+1, 'completed')
-            start = end
-            end = end + 10
-            x = x + 1
+                start = end
+                end = end + 10
+                x = x + 1
+            print('Done with UTC timezone')
+        
+            x = 0
+            start = 0
+            end = 10
 
-        self.stdout.write(self.style.SUCCESS('Successfully ran convert task multiple times.'))
+            while x != 10:
+                print(start, end)
+
+                for i in range(1):
+                    reuslt=convertpst.apply_async(args=[start, end], countdown=(i+1) * 20)
+                    reuslt.wait()
+
+                start = end
+                end = end + 10
+                x = x + 1
+            print('Done with PST timezone')
+

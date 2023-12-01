@@ -1,12 +1,7 @@
-from django.utils.crypto import get_random_string
 from celery import shared_task
-from datetime import timedelta
-from celery import Celery
-from faker import Faker
-from . models import Person,CustomUser
+from . models import CustomUser
 from django.utils import timezone
 import logging
-import pytz
 
 logger = logging.getLogger(__name__)
 
@@ -31,9 +26,8 @@ def convertpst(start, end):
         else:
             date_of_birth = x[start].date_of_birth
 
-            # Check if date_of_birth is not None before making it aware
             if date_of_birth is not None:
-                 w_pst = date_of_birth.astimezone(timezone.get_fixed_timezone(-480))  # UTC-8 (PST)
+                 w_pst = date_of_birth.astimezone(timezone.get_fixed_timezone(-480))
                  logger.info(w_pst)
                 
             start += 1
