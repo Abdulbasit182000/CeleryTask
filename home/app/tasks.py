@@ -1,40 +1,40 @@
-from celery import shared_task
-from . models import CustomUser
-from django.utils import timezone
 import logging
 
+from celery import shared_task
+from django.utils import timezone
+
+from .models import CustomUser
+
 logger = logging.getLogger(__name__)
+
 
 @shared_task
 def convert(start, end):
     x = CustomUser.objects.all()
-    
+
     while start != end:
-        if x[start].is_staff == 'True':
+        if x[start].is_staff == "True":
             end += 1
         else:
             logger.info(x[start].date_of_birth)
             start += 1
 
+
 @shared_task
 def convertpst(start, end):
     x = CustomUser.objects.all()
-    
+
     while start != end:
-        if x[start].is_staff == 'True':
+        if x[start].is_staff == "True":
             end += 1
         else:
             date_of_birth = x[start].date_of_birth
 
             if date_of_birth is not None:
-                 w_pst = date_of_birth.astimezone(timezone.get_fixed_timezone(-480))
-                 logger.info(w_pst)
-                
+                w_pst = date_of_birth.astimezone(timezone.get_fixed_timezone(-480))
+                logger.info(w_pst)
+
             start += 1
-
-
-
-
 
 
 # @shared_task

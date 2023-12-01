@@ -6,13 +6,13 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('app', '0003_remove_customuser_username_and_more'),
+        ("app", "0003_remove_customuser_username_and_more"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='customuser',
-            name='username',
-            field=models.CharField(default='abdul', max_length=150),
+            model_name="customuser",
+            name="username",
+            field=models.CharField(default="abdul", max_length=150),
         ),
     ]
