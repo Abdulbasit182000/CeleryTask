@@ -16,7 +16,7 @@ class Command(BaseCommand):
         for i in range(count):
             obj = CustomUser()
             obj.email = f"abdul{i}@gmail.com"
-            obj.contact = faker.phone_number()
+            obj.phone_number = faker.phone_number()
             obj.date_of_birth = faker.date_time_between(
                 start_date="-30y",
                 end_date="now",
