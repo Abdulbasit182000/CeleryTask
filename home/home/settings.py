@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "app",
     "django_extensions",
+    "django_crontab",
 ]
 
 MIDDLEWARE = [
@@ -157,3 +158,8 @@ LOGGING = {
         },
     },
 }
+
+CRONJOBS = [
+    ('*/1 * * * *', 'app.cron.convert_utc'),
+    ('*/1 * * * *', 'app.cron.convert_pst'),
+]
