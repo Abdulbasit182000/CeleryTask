@@ -11,11 +11,7 @@ app.config_from_object("django.conf:settings", namespace="CELERY")
 app.conf.beat_schedule = {
    "convert_utc": {
        "task": "app.tasks.convert_utc",
-       "schedule": 60,
-   },
-   "convert_pst": {
-       "task": "app.tasks.convert_pst",
-       "schedule": 60,
+       "schedule": 10,
    },
 }
 
